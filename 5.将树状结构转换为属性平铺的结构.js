@@ -48,7 +48,7 @@ function flatObj2(obj) {
   console.log("queue", queue);
   const result = {}
   while(queue.length) {
-    const [key, value] = queue.pop()
+    const [key, value] = queue.shift()
     for (const [k,v] of Object.entries(value)) {
       if (typeof v === 'object') {
         // 值没有处理完
