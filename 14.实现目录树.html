@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>目录树-菜单栏</title>
+  <style></style>
+</head>
+<body>
+  <!-- <details>
+    <summary>
+      <span>目录1</span>
+    </summary>
+    <details>
+      <summary>
+        <span>目录1-1</span>
+      </summary>
+    </details>
+  </details> -->
+
+  <div id="menuBox"></div>
+</body>
+<script>
+  let data = [{
+    id: 1,
+    name: "目录1",
+    parentId: 0
+  },{
+    id: 2,
+    name: "目录1-1",
+    parentId: 1
+  },{
+    id: 3,
+    name: "目录1-2",
+    parentId: 1
+  },{
+    id: 4,
+    name: "目录1-3",
+    parentId: 1
+  },{
+    id: 5,
+    name: "目录1-1-1",
+    parentId: 2
+  },{
+    id: 6,
+    name: "目录1-2-1",
+    parentId: 3
+  },{
+    id: 7,
+    name: "目录1-3-1",
+    parentId: 4
+  },{
+    id: 8,
+    name: "目录1-1-1-1",
+    parentId: 5
+  },{
+    id: 9,
+    name: "目录1-1-1-2",
+    parentId: 5
+  },{
+    id: 10,
+    name: "目录1-2-2",
+    parentId: 3
+  },{
+    id: 11,
+    name: "目录2",
+    parentId: 0
+  }]
+
+  // 1.先将给定的数据处理成通过children属性进行串联的结构，方便递归处理
+    let map = {};
+    data.forEach(item => {
+      map[item.id] = item;
+    });
+    const result = []
+    data.forEach(item => {
+      const parent = map[item.parentId];
+      // parant 存在
+      if(parent) {
+        parent.children = parent.children || [];
+        parent.children.push(item);
+      } else {
+        // parent 不存在，说明parentId为0，parent是最外层目录
+        result.push(item);
+      }
+    })
+    console.log("result", result);
+  // 2.通过原生js动态生成DOM树结构
+    function createMenu(data, root) {
+      if (data.length) {
+        data.forEach(d => {
+          const detailsEle = document.createElement('details');
+          const summaryEle = document.createElement('summary');
+          const spanEle = document.createElement('span');
+          console.log("name", d);
+          spanEle.innerHTML = d.name;
+          summaryEle.appendChild(spanEle);
+          detailsEle.appendChild(summaryEle);
+          root.appendChild(detailsEle);
+
+          if(d.children?.length) {
+            createMenu(d.children, detailsEle);
+          }
+        })
+      }
+    }
+
+    const rootDOM = document.querySelector('#menuBox');
+
+    createMenu(result, rootDOM);
+
+
+</script>
+</html>
