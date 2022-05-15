@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // 原始数据
+  let LinksList = [{
+    source: '男',
+    target: '华为',
+    value: 5
+  }, {
+    source: '男',
+    target: 'vivo',
+    value: 3
+  }, {
+    source: '男',
+    target: '苹果',
+    value: 3
+  }, {
+    source: '男',
+    target: 'OPPO',
+    value: 3
+  }, {
+    source: '男',
+    target: '小米',
+    value: 5
+  }, {
+    source: '女',
+    target: '华为',
+    value: 5
+  }, {
+    source: '女',
+    target: '苹果',
+    value: 10
+  }, {
+    source: '女',
+    target: '小米',
+    value: 3
+  }, {
+    source: '女',
+    target: 'OPPO',
+    value: 3
+  }, {
+    source: '女',
+    target: 'vivo',
+    value: 3
+  }];
+
+  // 转为
+
+  // region
+  // [
+  //   {
+  //       "name": "男"
+  //   },
+  //   {
+  //       "name": "华为"
+  //   },
+  //   {
+  //       "name": "vivo"
+  //   },
+  //   {
+  //       "name": "苹果"
+  //   },
+  //   {
+  //       "name": "OPPO"
+  //   },
+  //   {
+  //       "name": "小米"
+  //   },
+  //   {
+  //       "name": "女"
+  //   }
+  // ]
+  // endregion
+
+  // 对象数组去重
+  const unique = (arr, name) => {
+    const res = new Map();
+    return arr.filter(item => !res.has(item[name]) && res.set(item[name], 1));
+  }
+
+  // 如何处理桑基图的数据
+
+  // 处理成一个二维数组
+  const tempData = LinksList.map(item => {
+    console.log("item", item);
+    const result = [
+      { name: item['source'] },
+      {name: item['target']}
+    ];
+
+    return result
+  });
+  console.log("tempData", tempData);
+  // flat() 方法会按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。
+  // 将二维数组扁平化处理
+  const data = unique(tempData.flat(), 'name');
+  console.log("data", data);
+
+</script>
+
+</html>
