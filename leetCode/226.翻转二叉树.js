@@ -1,3 +1,10 @@
+/*
+ * @lc app=leetcode.cn id=226 lang=javascript
+ *
+ * [226] 翻转二叉树
+ */
+
+// @lc code=start
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -17,13 +24,14 @@
   var invertTree = function(root) {
     // 结束条件
     if(!root) {
-      // return root;
     } else {
       // 子问题
       // -- 先考虑到使用解构赋值将root的子树翻转[root.left, root.right] = [root.right, root.left]
       // 递归调用翻转所有的子树
-      return [root.left, root.right] = [invertTree(root.right), invertTree(root.left)]
+        [root.left, root.right] = [invertTree(root.right), invertTree(root.left)]
     }
+    return root;
 
 
   };
+// @lc code=end
