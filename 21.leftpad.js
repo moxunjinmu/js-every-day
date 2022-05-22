@@ -40,6 +40,7 @@ function leftpad2(str, length, ch){
       if(len%2==1) {
       
       // if(len&1){
+        // 如果当前位是1 拼接上当前位对应的 补齐字符串 
         total+=ch
       }
       if(len ==1) {
@@ -47,8 +48,10 @@ function leftpad2(str, length, ch){
         return total+str
       }
       
+      // 如果当前位是0,则ch变为下一伦要补齐的字符串
       ch+=ch
       // len = parseInt(len/2)
+      // 每次循环补齐的二进制位减一位
       len = len>>1
       console.log("total", total);
       // console.log("len%2", len%2);
