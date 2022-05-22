@@ -62,7 +62,7 @@ function leftpad2(str, length, ch){
 }
 // console.log(leftpad('hello', 10, '0'));
 // console.log(leftpad2('hello', 10, '0'));
-leftpad2('hello', 10, '0')
+leftpad2('helloo', 10, '0')
 // 性能测试
 // console.time('leftpad')
 // for (let i = 0; i < 100000; i++) {
