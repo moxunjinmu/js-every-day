@@ -30,7 +30,7 @@ var lemonadeChange = function(bills) {
       }
 
     } else {
-      // 20的情况
+      // 20的情况 - 贪心
       if(tenNum >0 && fiveNum>0) {
         tenNum -= 1;
         fiveNum -= 1;
