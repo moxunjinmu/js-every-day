@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <input multiple type="file" id="file" @change="handleChange">
+    <div id="imagebox"></div>
+  </div>
+
+</body>
+<script>
+  // 第一种是用window.URL.createObjectURl方法对选择的图片数据（可以勉强理解为input的value）生成一个blob对象路径。
+  function handleChangeone() {
+    var file = document.getElementById("file").files[0]; // 获取input上传的图片数据;
+    var img = new Image();
+    var url = window.URL.createObjectURL(file); // 得到bolb对象路径，可当成普通的文件路径一样使用，赋值给src;
+    img.src = url;
+    document.getElementById("imagebox").appendChild(img);
+  }
+
+  // 第二种是用获取 FileReader读取器。
+  // 用FileRader对像读取文件可分为四步；1、创建FileReader对像；2、调用readAsDataURL方法读取文件；3、调用onload事件监听，我们一需要拿到完整的数据，但我们又不知道文件何时读完，所以需要第三步监听；4、通过FileRader对像r的result属性拿到读取结果。
+  function handleChangetwo() {
+    var file = document.getElementById("file").files[0]; // 获取input上传的图片数据;
+    var read = new FileReader(); // 创建FileReader对像;
+    read.readAsDataURL(file); // 调用readAsDataURL方法读取文件;
+    read.onload = function () {
+      var url = read.result; // 拿到读取结果;
+      var img = new Image();
+      img.src = url;
+      document.getElementById("imagebox").appendChild(img);
+    };
+  }
+</script>
+
+</html>
