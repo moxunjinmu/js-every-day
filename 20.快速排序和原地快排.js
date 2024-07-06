@@ -67,5 +67,27 @@ function quickSort(arr) {
     return arr
   }
 
-console.log("快速排序", quickSort(Arr));
-console.log("原地快排", quickSort1(Arr, 0, Arr.length-1));
+// console.log("快速排序", quickSort(Arr));
+// console.log("原地快排", quickSort1(Arr, 0, Arr.length-1));
+
+
+const objectArr = [{name: 'a', value: 6}, {name: 'b', value: 2}, {name: 'c', value: 8}, {name: 'd', value: 10  }, {name: 'e', value: 5}
+, {name: 'f', value: 1}, {name: 'g', value: 7}, {name: 'h', value: 3}, {name: 'i', value: 9}, {name: 'j', value: 4}]
+
+function quickSort(arr) {
+  if(arr.length<2) return arr
+  let flag = arr[0].value;
+  let left = [];
+  let right = [];
+  for(let i = 1; i<arr.length;i++) {
+    if(arr[i].value > flag) {
+      right.push(arr[i])
+    } else {
+      left.push(arr[i])
+    }
+  }
+
+  return quickSort(left).concat(arr[0], quickSort(right))
+}
+
+console.log("快速排序: 通过对象的某个属性排序", quickSort(objectArr));
